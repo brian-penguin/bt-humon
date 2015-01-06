@@ -24,6 +24,8 @@ gem "simple_form"
 gem "title"
 gem "uglifier"
 gem "unicorn"
+gem "oj"
+gem "jbuilder"
 
 group :development do
   gem "spring"
@@ -53,4 +55,5 @@ end
 
 group :staging, :production do
   gem "rails_stdout_logging"
+  gem "rails_12factor"
 end
