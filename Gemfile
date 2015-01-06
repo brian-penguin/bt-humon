@@ -55,5 +55,5 @@ group :test do
 end
 
 group :staging, :production do
-  gem "rails_stdout_logging"
+  gem "rails_12factor"
 end
