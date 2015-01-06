@@ -10,10 +10,13 @@ gem "email_validator"
 gem "flutie"
 gem "high_voltage"
 gem "i18n-tasks"
+gem "jbuilder"
 gem "jquery-rails"
 gem "neat", "~> 1.5.1"
 gem "newrelic_rpm"
 gem "normalize-rails", "~> 3.0.0"
+gem "oj"
+gem "oj_mimic_json"
 gem "pg"
 gem "rack-timeout"
 gem "rails", "4.2.0"
@@ -24,8 +27,7 @@ gem "simple_form"
 gem "title"
 gem "uglifier"
 gem "unicorn"
-gem "oj"
-gem "jbuilder"
+
 
 group :development do
   gem "spring"
@@ -55,5 +57,4 @@ end
 
 group :staging, :production do
   gem "rails_stdout_logging"
-  gem "rails_12factor"
 end
