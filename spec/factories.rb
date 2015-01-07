@@ -19,11 +19,6 @@ FactoryGirl.define do
     SecureRandom.hex(3)
   end
 
-  factory :attendance do
-    event
-    user
-  end
-
   factory :event do
     lat
     lon
