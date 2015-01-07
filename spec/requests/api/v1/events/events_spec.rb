@@ -45,7 +45,7 @@ describe 'POST /v1/events' do
 
     event = Event.last
     expect(response_json).to eq({ 'id' => event.id })
-    expect(response_json).to eq '123 Main St.'
+    expect(event.address).to eq '123 Main St.'
     expect(event.ended_at.to_i).to eq date.to_i
     expect(event.lat).to eq lat
     expect(event.lon).to eq lon
