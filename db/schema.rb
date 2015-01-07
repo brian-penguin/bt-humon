@@ -47,8 +47,11 @@ ActiveRecord::Schema.define(version: 20150107163354) do
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "device_token"
   end
+
+  add_index "users", ["device_token"], name: "index_users_on_device_token", unique: true, using: :btree
 
 end
