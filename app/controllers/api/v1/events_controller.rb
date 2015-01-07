@@ -1,4 +1,4 @@
-class Api::V1::EventsController < ApplicationController
+class Api::V1::EventsController < ApiController
   def show
     @event = Event.find(params[:id])
   end
