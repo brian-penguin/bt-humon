@@ -1,4 +1,4 @@
-json cache! event do
+json.cache! event do
   json.address event.address
   json.ended_at event.ended_at
   json.id event.id

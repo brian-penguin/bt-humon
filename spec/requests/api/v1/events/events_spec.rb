@@ -12,6 +12,7 @@ describe 'GET /v1/events/:id' do
         'ended_at' => event.ended_at,
         'id' => event.id,
         'lat' => event.lat,
+        'lon' => event.lon,
         'name' => event.name,
         'started_at' => event.started_at.as_json,
         'owner' => {
