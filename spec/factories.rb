@@ -1,11 +1,6 @@
-FactoryGirl.define do
-  sequence :lat do |n|
-    "#{n}.0".to_f
-  end
+require 'faker'
 
-  sequence :lon do |n|
-    "#{n}.0".to_f
-  end
+FactoryGirl.define do
 
   sequence :name do |n|
     "name #{n}"
@@ -20,8 +15,8 @@ FactoryGirl.define do
   end
 
   factory :event do
-    lat
-    lon
+    lat { Faker::Address.latitude.to_f.round(5) }
+    lon { Faker::Address.longitude.to_f.round(5) }
     name
     started_at
     owner factory: :user
