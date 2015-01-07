@@ -12,7 +12,7 @@ FactoryGirl.define do
   end
 
   sequence :started_at do |n|
-    Time.zone.now + n.hours
+    n.hours.from_now
   end
 
   sequence :token do
