@@ -7,17 +7,15 @@ describe 'GET /v1/events/:id' do
     get "/v1/events/#{event.id}"
 
     expect(response_json).to eq(
-      {
-        'address' => event.address,
-        'ended_at' => event.ended_at,
-        'id' => event.id,
-        'lat' => event.lat,
-        'lon' => event.lon,
-        'name' => event.name,
-        'started_at' => event.started_at.as_json,
-        'owner' => {
-          'device_token' => event.owner.device_token
-        }
+      'address' => event.address,
+      'ended_at' => event.ended_at,
+      'id' => event.id,
+      'lat' => event.lat,
+      'lon' => event.lon,
+      'name' => event.name,
+      'started_at' => event.started_at.as_json,
+      'owner' => {
+        'device_token' => event.owner.device_token
       }
     )
   end
@@ -41,10 +39,10 @@ describe 'POST /v1/events' do
       owner: {
         device_token: device_token
       }
-    }.to_json, { 'Content-Type' => 'application/json' }
+    }.to_json, 'Content-Type' => 'application/json'
 
     event = Event.last
-    expect(response_json).to eq({ 'id' => event.id })
+    expect(response_json).to eq('id' => event.id)
     expect(event.address).to eq '123 Main St.'
     expect(event.ended_at.to_i).to eq date.to_i
     expect(event.lat).to eq lat
@@ -55,9 +53,9 @@ describe 'POST /v1/events' do
   end
 
   it 'returns an error message when invalid' do
-    post '/v1/events', {}.to_json, { 'Content-Type' => 'application/json' }
+    post '/v1/events', {}.to_json, 'Content-Type' => 'application/json'
 
-    expect(response_json).to eq({
+    expect(response_json).to eq(
       'message' => 'Validation Failed',
       'errors' => [
         "Lat can't be blank",
@@ -65,7 +63,7 @@ describe 'POST /v1/events' do
         "Name can't be blank",
         "Started at can't be blank"
       ]
-    })
+    )
     expect(response.code.to_i).to eq 422
   end
 end
