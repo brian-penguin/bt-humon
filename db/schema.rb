@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20150107163354) do
     t.string   "address"
     t.datetime "ended_at"
     t.float    "lat",        null: false
-    t.float    "long",       null: false
+    t.float    "lon",        null: false
     t.string   "name",       null: false
     t.datetime "started_at", null: false
     t.integer  "user_id",    null: false
@@ -47,14 +47,8 @@ ActiveRecord::Schema.define(version: 20150107163354) do
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "facebook_id", null: false
-    t.string   "first_name",  null: false
-    t.string   "image_url",   null: false
-    t.string   "last_name",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "users", ["facebook_id"], name: "index_users_on_facebook_id", using: :btree
 
 end
