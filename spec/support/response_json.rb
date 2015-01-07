@@ -1,9 +1,9 @@
-module ResponseJSON
+module ResponseJson
   def response_json
     JSON.parse(response.body)
   end
 end
 
 RSpec.configure do |config|
-  config.include ResponseJSON
+  config.include ResponseJson
 end
