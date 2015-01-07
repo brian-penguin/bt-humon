@@ -1,7 +1,6 @@
 require 'faker'
 
 FactoryGirl.define do
-
   sequence :name do |n|
     "name #{n}"
   end
