@@ -45,7 +45,8 @@ describe 'Events Requests' do
         }
       }
 
-      post '/v1/events', { event: event_params }.to_json, 'Content-Type' => 'application/json'
+      post '/v1/events', { event: event_params }.to_json, 'Content-Type' =>
+      'application/json'
 
       response_event = Event.last
       expect(response).to have_http_status(:created)
