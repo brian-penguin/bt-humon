@@ -60,7 +60,18 @@ describe 'Events Requests' do
     end
 
     it 'returns an error message when invalid' do
-      post '/v1/events', { event: {} }.to_json, 'Content-Type' =>
+      bad_event_params = {
+        address: nil,
+        ended_at: nil,
+        lat: nil,
+        lon: nil,
+        name: nil,
+        started_at: nil,
+        owner: {
+          device_token: nil
+        }
+      }
+      post '/v1/events', { event: bad_event_params }.to_json, 'Content-Type' =>
                                                 'application/json'
 
       expect(response_json).to eq(
