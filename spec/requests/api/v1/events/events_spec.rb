@@ -26,15 +26,14 @@ describe 'Events Requests' do
   end
 
   describe 'POST /v1/events' do
-    it 'saves the address, lat, lon, name, and started_at date' do
+    it 'saves the address, lat, lon, name, and started_at date', focus: true do
       # date = Time.current
       # lat = Faker::Address.latitude.to_f.round(5)
       # lon = Faker::Address.longitude.to_f.round(5)
       # device_token = '123abc456xyz'
       # owner = create(:user, device_token: device_token)
       event = build :event
-
-      post '/v1/events', {
+      event_params = {
         address: event.address,
         ended_at: event.ended_at,
         lat: event.lat,
@@ -44,7 +43,9 @@ describe 'Events Requests' do
         owner: {
           device_token: event.owner.device_token
         }
-      }.to_json, 'Content-Type' => 'application/json'
+      }
+
+      post '/v1/events', { event: event_params }.to_json, 'Content-Type' => 'application/json'
 
       response_event = Event.last
       expect(response).to have_http_status(:created)
@@ -59,7 +60,8 @@ describe 'Events Requests' do
     end
 
     it 'returns an error message when invalid' do
-      post '/v1/events', {}.to_json, 'Content-Type' => 'application/json'
+      post '/v1/events', { event: {} }.to_json, 'Content-Type' =>
+                                                'application/json'
 
       expect(response_json).to eq(
         'message' => 'Validation Failed',

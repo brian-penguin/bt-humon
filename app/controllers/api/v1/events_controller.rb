@@ -19,15 +19,14 @@ class Api::V1::EventsController < ApiController
   private
 
   def event_params
-    {
-      address: params[:address],
-      ended_at: params[:ended_at],
-      lat: params[:lat],
-      lon: params[:lon],
-      name: params[:name],
-      started_at: params[:started_at],
-      owner: user
-    }
+    params.require(:event).permit(:address,
+                                  :ended_at,
+                                  :lat,
+                                  :lon,
+                                  :name,
+                                  :started_at,
+                                  owner: [:device_token]).
+      merge(owner: user)
   end
 
   def user
@@ -35,6 +34,6 @@ class Api::V1::EventsController < ApiController
   end
 
   def device_token
-    params[:owner].try(:[], :device_token)
+    params[:event][:owner].try(:[], :device_token)
   end
 end
