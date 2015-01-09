@@ -88,4 +88,30 @@ describe 'Events Requests' do
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end
+
+  describe 'PATCH /v1/events/:id' do
+    it 'updates the events attributes' do
+      event = create(:event, name: 'Old Name')
+      new_name = 'New Name'
+      event_params = {
+        address: event.address,
+        ended_at: event.ended_at,
+        lat: event.lat,
+        lon: event.lon,
+        name: new_name,
+        started_at: event.started_at,
+        owner: {
+          device_token: event.owner.device_token
+        }
+      }
+
+      patch "/v1/events/#{event.id}",
+            { event: event_params }.to_json,
+            'Content-Type' => 'application/json'
+
+      event.reload
+      expect(event.name).to eq new_name
+      expect(response_json).to eq('id' => event.id)
+    end
+  end
 end
