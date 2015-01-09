@@ -27,11 +27,6 @@ describe 'Events Requests' do
 
   describe 'POST /v1/events' do
     it 'saves the address, lat, lon, name, and started_at date', focus: true do
-      # date = Time.current
-      # lat = Faker::Address.latitude.to_f.round(5)
-      # lon = Faker::Address.longitude.to_f.round(5)
-      # device_token = '123abc456xyz'
-      # owner = create(:user, device_token: device_token)
       event = build :event
       event_params = {
         address: event.address,
@@ -109,9 +104,23 @@ describe 'Events Requests' do
             { event: event_params }.to_json,
             'Content-Type' => 'application/json'
 
-      event.reload
-      expect(event.name).to eq new_name
-      expect(response_json).to eq('id' => event.id)
+      expect(response).to have_http_status(:ok)
+      expect(response_json).to eq(
+        'address' => event.address,
+        'created_at' => event.created_at.as_json,
+        'ended_at' => event.ended_at,
+        'id' => event.id,
+        'lat' => event.lat,
+        'lon' => event.lon,
+        'name' => new_name,
+        'started_at' => event.started_at.as_json,
+        'updated_at' => event.updated_at.as_json,
+        'owner' => {
+          'created_at' => event.owner.created_at.as_json,
+          'device_token' => event.owner.device_token,
+          'updated_at' => event.owner.updated_at.as_json
+        }
+      )
     end
   end
 end
