@@ -72,8 +72,9 @@ describe 'Events Requests' do
           device_token: nil
         }
       }
-      post '/v1/events', { event: bad_event_params }.to_json, 'Content-Type' =>
-                                                'application/json'
+      post '/v1/events',
+           { event: bad_event_params }.to_json,
+           'Content-Type' => 'application/json'
 
       expect(response_json).to eq(
         'message' => 'Validation Failed',
