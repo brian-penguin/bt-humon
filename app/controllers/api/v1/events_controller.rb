@@ -18,7 +18,7 @@ class Api::V1::EventsController < ApiController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(event)
+    if @event.update(event)
       render status: :ok
     else
       render json: {
