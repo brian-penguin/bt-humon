@@ -20,6 +20,11 @@ class Api::V1::EventsController < ApiController
     @event = Event.find(params[:id])
     if @event.update_attributes(event)
       render status: :ok
+    else
+      render json: {
+        message: 'Validation Failed',
+        errors: @event.errors.full_messages
+      }, status: :unprocessable_entity
     end
   end
 

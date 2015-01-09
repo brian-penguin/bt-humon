@@ -122,5 +122,34 @@ describe 'Events Requests' do
         }
       )
     end
+
+    it 'returns and error message when invalid' do
+      event = create(:event)
+
+      bad_event_params = {
+        address: event.address,
+        ended_at: event.ended_at,
+        lat: event.lat,
+        lon: event.lon,
+        name: nil,
+        started_at: event.started_at,
+        owner: {
+          device_token: event.owner.device_token
+        }
+      }
+
+      patch "/v1/events/#{event.id}",
+            { event: bad_event_params }.to_json,
+            'Content-Type' => 'application/json'
+
+      event.reload
+      expect(event.name).to_not be nil
+      expect(response_json).to eq(
+        'message' => 'Validation Failed',
+        'errors' => [
+          "Name can't be blank",
+        ]
+      )
+    end
   end
 end
