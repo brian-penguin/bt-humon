@@ -125,18 +125,7 @@ describe 'Events Requests' do
 
     it 'returns and error message when invalid' do
       event = create(:event)
-
-      bad_event_params = {
-        address: event.address,
-        ended_at: event.ended_at,
-        lat: event.lat,
-        lon: event.lon,
-        name: nil,
-        started_at: event.started_at,
-        owner: {
-          device_token: event.owner.device_token
-        }
-      }
+      bad_event_params = attributes_for(:event, name: nil)
 
       patch "/v1/events/#{event.id}",
             { event: bad_event_params }.to_json,
