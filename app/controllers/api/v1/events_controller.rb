@@ -16,6 +16,10 @@ class Api::V1::EventsController < ApiController
     end
   end
 
+  def update
+
+  end
+
   private
 
   def event_params
