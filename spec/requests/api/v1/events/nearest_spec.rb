@@ -17,6 +17,7 @@ describe 'Events Requests' do
                         lon=#{request_lon}&
                         radius=#{request_radius}"
 
+binding.pry
       expect(response).to have_http_status(:ok)
       expect(response_json).to eq([
         'address' => near_event.address,

@@ -107,6 +107,7 @@ GEM
       activesupport
       capybara
       i18n
+    geocoder (1.2.6)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
     high_voltage (2.2.1)
@@ -289,6 +290,7 @@ DEPENDENCIES
   faker
   flutie
   formulaic
+  geocoder
   high_voltage
   i18n-tasks
   jbuilder
