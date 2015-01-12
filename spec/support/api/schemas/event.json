@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": [
+    "address",
+    "created_at",
+    "ended_at",
+    "id",
+    "lat",
+    "lon",
+    "name",
+    "started_at",
+    "updated_at",
+    ["owner"]
+  ],
+  "properties": {
+    "address": { "type":["string", "null"] },
+    "created_at": { "type": "string"},
+    "ended_at": {"type": ["string", "null"]},
+    "id": {"type": "integer"},
+    "lat": {"type": "float"},
+    "lon": {"type": "float"},
+    "name": {"type": "string"},
+    "started_at": {"type": "string"},
+    "updated_at": {"type": "string"},
+    "owner":{
+      "type": "object",
+      "required": [
+        "created_at",
+        "device_token",
+        "updated_at"
+      ],
+      "properties": {
+        "created_at": { "type": "string"},
+        "device_token": { "type": "string"},
+        "updated_at": { "type": "string"}
+      }
+    }
+  }
+}

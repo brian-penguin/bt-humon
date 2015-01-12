@@ -5,22 +5,7 @@ describe 'Events Requests' do
 
       get "/v1/events/#{event.id}"
 
-      expect(response_json).to eq(
-        'address' => event.address,
-        'created_at' => event.created_at.as_json,
-        'ended_at' => event.ended_at,
-        'id' => event.id,
-        'lat' => event.lat,
-        'lon' => event.lon,
-        'name' => event.name,
-        'started_at' => event.started_at.as_json,
-        'updated_at' => event.updated_at.as_json,
-        'owner' => {
-          'created_at' => event.owner.created_at.as_json,
-          'device_token' => event.owner.device_token,
-          'updated_at' => event.owner.updated_at.as_json
-        }
-      )
+      expect(response).to match_response_schema(:event)
       expect(response).to have_http_status(:ok)
     end
   end
