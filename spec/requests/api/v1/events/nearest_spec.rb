@@ -13,7 +13,6 @@ describe 'Events Requests' do
                                   radius: radius)
 
       expect(response).to have_http_status(:ok)
-      binding.pry
       expect(response).to match_response_schema(:nearests)
       # expect(response_json).to eq([
       #   {
