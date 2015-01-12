@@ -5,7 +5,6 @@ class Api::V1::EventsController < ApiController
 
   def create
     @event = Event.new(event)
-
     if @event.save
       render status: :created
     else
