@@ -50,5 +50,15 @@ describe 'Events Requests' do
         }
       ])
     end
+    it 'returns an error message if no event is found' do
+      request_lat = 37.771098
+      request_lon = -122.430782
+      request_radius = 1
+
+      get "/v1/events/nearests?lat=#{request_lat}&lon=#{request_lon}&radius=#{request_radius}"
+
+      expect(response_json).to eq('message' => 'No Events Found')
+      expect(response).to have_http_status(:ok)
+    end
   end
 end
