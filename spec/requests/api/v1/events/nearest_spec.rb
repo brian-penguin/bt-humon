@@ -8,7 +8,9 @@ describe 'Events Requests' do
       # distance is measured in kilometers (Mass is about 306 km across)
       radius = 306
 
-      get "/v1/events/nearests?lat=#{boston_event[:lat]}&lon=#{boston_event[:lon]}&radius=#{radius}"
+      get v1_events_nearests_path(lat: boston_event[:lat],
+                                  lon: boston_event[:lon],
+                                  radius: radius)
 
       expect(response).to have_http_status(:ok)
       expect(response_json).to eq([
