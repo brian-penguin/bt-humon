@@ -79,22 +79,7 @@ describe 'Events Requests' do
             'Content-Type' => 'application/json'
 
       expect(response).to have_http_status(:ok)
-      expect(response_json).to eq(
-        'address' => event.address,
-        'created_at' => event.created_at.as_json,
-        'ended_at' => event.ended_at,
-        'id' => event.id,
-        'lat' => event.lat,
-        'lon' => event.lon,
-        'name' => new_name,
-        'started_at' => event.started_at.as_json,
-        'updated_at' => event.updated_at.as_json,
-        'owner' => {
-          'created_at' => event.owner.created_at.as_json,
-          'device_token' => event.owner.device_token,
-          'updated_at' => event.owner.updated_at.as_json
-        }
-      )
+      expect(response).to match_response_schema(:event)
     end
 
     it 'returns and error message when invalid' do
