@@ -77,7 +77,7 @@ describe 'Events Requests' do
     end
 
     it 'returns an error when the event cant be found' do
-      invalid_id = 666
+      invalid_id = 'foo'
       new_name = 'brians party'
       event_params = {
         name: new_name,
@@ -92,7 +92,7 @@ describe 'Events Requests' do
 
       expect(response).to have_http_status(:not_found)
       expect(response_json).to eq(
-        'errors' => "Couldn't find Event with 'id'=666"
+        'errors' => "Couldn't find Event with 'id'=foo"
       )
     end
 
