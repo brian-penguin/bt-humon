@@ -3,7 +3,7 @@ describe 'Events Requests' do
     it 'returns an event by :id' do
       event = create(:event)
 
-      get "/v1/events/#{event.id}"
+      get v1_event_path(event.id)
 
       expect(response).to match_response_schema(:event)
       expect(response).to have_http_status(:ok)
@@ -25,7 +25,7 @@ describe 'Events Requests' do
         }
       }
 
-      post '/v1/events', { event: event_params }.to_json, 'Content-Type' =>
+      post v1_events_path, { event: event_params }.to_json, 'Content-Type' =>
       'application/json'
 
       response_event = Event.last
@@ -46,7 +46,7 @@ describe 'Events Requests' do
           device_token: nil
         }
       }
-      post '/v1/events',
+      post v1_events_path,
            { event: bad_event_params }.to_json,
            'Content-Type' => 'application/json'
 
@@ -68,7 +68,7 @@ describe 'Events Requests' do
         }
       }
 
-      patch "/v1/events/#{event.id}",
+      patch v1_event_path(event.id),
             { event: event_params }.to_json,
             'Content-Type' => 'application/json'
 
@@ -86,7 +86,7 @@ describe 'Events Requests' do
         }
       }
 
-      patch "/v1/events/#{invalid_id}",
+      patch v1_event_path(invalid_id),
             { event: event_params }.to_json,
             'Content-Type' => 'application/json'
 
@@ -100,7 +100,7 @@ describe 'Events Requests' do
       event = create(:event)
       bad_event_params = attributes_for(:event, name: nil)
 
-      patch "/v1/events/#{event.id}",
+      patch v1_event_path(event.id),
             { event: bad_event_params }.to_json,
             'Content-Type' => 'application/json'
 
