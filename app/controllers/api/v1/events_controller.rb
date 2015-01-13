@@ -9,15 +9,11 @@ class Api::V1::EventsController < ApiController
   end
 
   def update
-    @event = Event.find(params[:id])
-    if @event.update(event)
-      render status: :ok
-    else
-      render json: {
-        message: 'Validation Failed',
-        errors: @event.errors.full_messages
-      }, status: :unprocessable_entity
-    end
+    @event = find_event
+
+    @event.update!(event)
+
+    render status: :ok
   end
 
   private
@@ -42,5 +38,14 @@ class Api::V1::EventsController < ApiController
 
   def event
     event_params.merge(owner: user)
+  end
+
+  def find_event
+    if event = Event.find(params[:id])
+      event
+    else
+      raise ActiveRecord::RecordNotFound,
+            "Couldn't find Event with 'id=#{params[:id]}"
+    end
   end
 end

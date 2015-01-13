@@ -76,7 +76,27 @@ describe 'Events Requests' do
       expect(response).to match_response_schema(:event)
     end
 
-    it 'returns and error message when invalid' do
+    it 'returns an error when the event cant be found' do
+      invalid_id = 666
+      new_name = 'brians party'
+      event_params = {
+        name: new_name,
+        owner: {
+          device_token: nil
+        }
+      }
+
+      patch "/v1/events/#{invalid_id}",
+            { event: event_params }.to_json,
+            'Content-Type' => 'application/json'
+
+      expect(response).to have_http_status(:not_found)
+      expect(response_json).to eq(
+        'errors' => "Couldn't find Event with 'id'=666"
+      )
+    end
+
+    it 'returns an error message when invalid' do
       event = create(:event)
       bad_event_params = attributes_for(:event, name: nil)
 
@@ -86,11 +106,9 @@ describe 'Events Requests' do
 
       event.reload
       expect(event.name).to_not be nil
+      expect(response).to have_http_status(:bad_request)
       expect(response_json).to eq(
-        'message' => 'Validation Failed',
-        'errors' => [
-          "Name can't be blank",
-        ]
+        'errors' => "Validation failed: Name can't be blank"
       )
     end
   end
