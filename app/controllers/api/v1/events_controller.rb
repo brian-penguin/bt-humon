@@ -41,11 +41,6 @@ class Api::V1::EventsController < ApiController
   end
 
   def find_event
-    if event = Event.find(params[:id])
-      event
-    else
-      raise ActiveRecord::RecordNotFound,
-            "Couldn't find Event with 'id=#{params[:id]}"
-    end
+    Event.find(params[:id])
   end
 end
