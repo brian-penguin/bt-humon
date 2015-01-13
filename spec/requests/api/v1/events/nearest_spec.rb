@@ -26,8 +26,7 @@ describe 'Events Requests' do
                                   lon: request_lon,
                                   radius: request_radius)
 
-      expect(response_json).to eq('message' => 'No Events Found')
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:no_content)
     end
   end
 end

@@ -10,9 +10,7 @@ class Api::V1::EventsController < ApiController
 
   def update
     @event = find_event
-
     @event.update!(event)
-
     render status: :ok
   end
 

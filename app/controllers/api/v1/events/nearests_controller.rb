@@ -8,7 +8,7 @@ class Api::V1::Events::NearestsController < ApiController
     if @events.present?
       render status: :ok
     else
-      render json: { message: 'No Events Found' }, status: :ok
+      render status: :no_content
     end
   end
 
