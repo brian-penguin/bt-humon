@@ -51,15 +51,9 @@ describe 'Events Requests' do
            'Content-Type' => 'application/json'
 
       expect(response_json).to eq(
-        'message' => 'Validation Failed',
-        'errors' => [
-          "Lat can't be blank",
-          "Lon can't be blank",
-          "Name can't be blank",
-          "Started at can't be blank"
-        ]
+        'errors' =>  "Validation failed: Lat can't be blank, Lon can't be blank, Name can't be blank, Started at can't be blank"
       )
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:bad_request)
     end
   end
 

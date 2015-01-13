@@ -4,15 +4,8 @@ class Api::V1::EventsController < ApiController
   end
 
   def create
-    @event = Event.new(event)
-    if @event.save
-      render status: :created
-    else
-      render json: {
-        message: 'Validation Failed',
-        errors: @event.errors.full_messages
-      }, status: :unprocessable_entity
-    end
+    @event = Event.create!(event)
+    render status: :created
   end
 
   def update
