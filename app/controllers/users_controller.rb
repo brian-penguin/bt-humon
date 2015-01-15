@@ -10,15 +10,15 @@ class UsersController < ApplicationController
 
     if @user.valid?
       sign_in(@user)
-      redirect_to root_path
+      redirect_to root_path, notice: 'You have successfully logged in!'
     else
-      render :new
+      render :new, notice: 'Invalid log in credentials'
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password, device_token: nil)
   end
 end

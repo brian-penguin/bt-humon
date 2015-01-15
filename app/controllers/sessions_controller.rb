@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = authenticate_session(session_params)
 
     if sign_in(user)
-      redirect_to root_path
+      redirect_to root_path, notice: 'You have successfully logged in!'
     else
       render :new
     end
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to root_path
+    redirect_to root_path, notice: 'You have successfully signed out!'
   end
 
   private

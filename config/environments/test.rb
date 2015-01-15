@@ -41,4 +41,6 @@ Rails.application.configure do
   config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: 'www.example.com' }
+  # for testing as a user
+  config.middleware.insert_after Warden::Manager, Monban::BackDoor
 end
