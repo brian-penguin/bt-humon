@@ -12,6 +12,10 @@ FactoryGirl.define do
     SecureRandom.hex(3)
   end
 
+  sequence :email do |n|
+    "user#{n}@example.com"
+  end
+
   factory :event do
     lat { Faker::Address.latitude.to_f.round(5) }
     lon { Faker::Address.longitude.to_f.round(5) }
@@ -42,5 +46,7 @@ FactoryGirl.define do
 
   factory :user do
     device_token { generate(:token) }
+    email
+    password_digest 'password'
   end
 end

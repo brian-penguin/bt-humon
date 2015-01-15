@@ -3,8 +3,8 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.timestamps null: false
       t.string :device_token
-      t.string :email, null: false
-      t.string :password_digest, null: false
+      t.string :email
+      t.string :password_digest
     end
 
     add_index :users, :device_token, unique: true

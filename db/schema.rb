@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20150107163354) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "device_token"
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
+    t.string   "email"
+    t.string   "password_digest"
   end
 
   add_index "users", ["device_token"], name: "index_users_on_device_token", unique: true, using: :btree
